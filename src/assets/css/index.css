@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@layer components {
+  .btn {
+    background: rgb(255, 81, 88);
+    @apply rounded-full text-white font-bold text-xs py-4 px-2 w-full text-nowrap;
+  }
+}

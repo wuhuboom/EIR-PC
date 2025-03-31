@@ -18,6 +18,8 @@
     }
   ],
   "ios_download_urls": [
+    { "name": "点击下载", "url": "https://www.google.com" },
+    { "name": "主线下载", "url": "https://www.google.com" },
     { "name": "下载地址1", "url": "https://www.google.com" },
     { "name": "下载地址2", "url": "https://www.google.com" }
   ],

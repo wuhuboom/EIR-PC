@@ -1,0 +1,104 @@
+.ntf-yellow-form {
+  font-size: 14px;
+  .van-cell {
+    background-color: transparent;
+    padding: 0;
+
+    .van-field__body {
+      width: 257px;
+      height: 30px;
+      background: #fdf1bd;
+    }
+    &.icon-input {
+      .van-field__body {
+        // padding-left: 80px;
+        color: #2c2c2c;
+      }
+      .icon-img {
+        width: 40px;
+        height: 40px;
+      }
+      .van-field__left-icon {
+        position: absolute;
+        height: 96px;
+        width: 80px;
+        left: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &.phone-input {
+      .van-field__body {
+        padding-left: 172px;
+      }
+      .icon-img {
+        width: 40px;
+        height: 40px;
+      }
+      .van-field__left-icon {
+        z-index: 16;
+        position: absolute;
+        height: 96px;
+        width: 152px;
+        left: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::before {
+          content: "";
+          display: block;
+          width: 2px;
+          height: 50px;
+          background-color: #fff;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0;
+        }
+      }
+    }
+    &::after {
+      display: none;
+    }
+  }
+  .van-field__label {
+    text-align: right;
+    color: #fff;
+  }
+  .van-field__control {
+    color: #333;
+    text-align: right;
+  }
+  .van-field--error .van-field__control,
+  .van-field--error .van-field__control::placeholder {
+    color: #999999;
+  }
+  .van-button {
+    width: 120px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 0;
+    &[type="submit"] {
+      background: linear-gradient(
+        274deg,
+        #c67d30 0%,
+        #daa42a 53%,
+        #c77c32 100%
+      );
+    }
+    &[type="button"] {
+      background: linear-gradient(
+        274deg,
+        #929292 0%,
+        #cbcbcb 53%,
+        #929292 100%
+      );
+    }
+  }
+}

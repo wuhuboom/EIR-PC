@@ -1531,7 +1531,6 @@ export default {
       if (err) return;
       this.catTree = JSON.parse(res.data.mulConfig);
       res.data.mulConfig = JSON.parse(res.data.mulConfig);
-      console.log('----', this.extractDeepList(this.catTree));
       this.setlotteryType(this.id);
       if (!res.data.nextExpect) {
         res.data.nextExpect = {};

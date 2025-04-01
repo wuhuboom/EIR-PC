@@ -238,7 +238,6 @@ export default new Vuex.Store({
       state.devApp = data;
     },
     changeSafe(state, data) {
-      console.log(data);
       state.safeData = data;
     },
     setFromRoute(state, data) {
@@ -316,7 +315,6 @@ export default new Vuex.Store({
     async getPaySet({ commit }) {
       const [err, res] = await userApi.getPwdPay();
       if (err) return;
-      console.log(res.data.paySet);
       commit('changepaySet', res.data.paySet);
     },
     async getBankCard({ commit }) {
@@ -343,7 +341,6 @@ export default new Vuex.Store({
       const [err, result] = await userApi.authSysconfig();
       if (err) return;
       commit('setCodeList', result.data);
-      console.log(params);
       commit('setMainShow', {
         show: false,
         msg: '',

@@ -107,7 +107,7 @@ export default {
     // 初始化 WebSocket
     initWebSocket({ commit, dispatch }) {
       //wss://api.orz-orz.cc
-      const site = process.env.VUE_APP_WS || 'wss://api.orz-orz.cc'; // 默认值作为备用
+      const site = window.WSPATH || process.env.VUE_APP_WS; // 默认值作为备用
       const url = `${site}/player/ws/${auth.getToken()}`;
       const playerId = app.$store.state.user.id;
 

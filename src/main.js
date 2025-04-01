@@ -18,7 +18,7 @@ Vue.use(VueClipboard);
 import '@/assets/page.css';
 import '@/assets/base.scss';
 import '@/assets/resVant.scss';
-const num = process.env.VUE_APP_UNIFIED_NUMBER || 100;
+const num = window.UNIFIED_NUMBER || 100;
 Vue.prototype.divide = (v, fix = true) => {
   if (!fix) {
     return (Math.trunc(v * 100) / 100).toFixed(2); // 始终保留两位小数
@@ -33,10 +33,9 @@ Vue.prototype.sleep = (time) => {
   return new Promise((resolve) => setTimeout(resolve, time));
 };
 Vue.prototype.$util = util;
-Vue.prototype.$baseURL =
-  process.env.NODE_ENV === 'production'
-    ? window.BASEPATH
-    : process.env.VUE_APP_API;
+Vue.prototype.$baseURL = window.BASEPATH
+  ? window.BASEPATH
+  : process.env.VUE_APP_API;
 const app = new Vue({
   router,
   store,

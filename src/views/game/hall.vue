@@ -273,6 +273,7 @@
                   :curPre="curPre"
                   @changemultiple="changemultiple"
                   ref="$cont"
+                  :playType="value"
                   @total="giveTotal"
                   :is="currentComponent"
                   :key="value"
@@ -571,6 +572,10 @@ import ball24 from './components/ball24';
 import ball25 from './components/ball25';
 import ball26 from './components/ball26';
 import ball27 from './components/ball27';
+import ball28 from './components/ball28';
+import ball29 from './components/ball29';
+import ball30 from './components/ball30';
+import ball31 from './components/ball31';
 import ball3 from './components/ball3';
 import ball4 from './components/ball4';
 import ball5 from './components/ball5';
@@ -680,6 +685,10 @@ export default {
     ball25,
     ball26,
     ball27,
+    ball28,
+    ball29,
+    ball30,
+    ball31,
   },
   computed: {
     isbets28() {
@@ -731,14 +740,11 @@ export default {
     choseNavs() {
       return this.catTree.map((item) => item.name);
     },
+
     curPre() {
       const {
         losses,
         hot,
-        // zu3,
-        // zu3_hot,
-        // zu6,
-        // zu6_hot,
         zxzh1,
         zxzh1_hot,
         zxzh2,
@@ -756,7 +762,6 @@ export default {
           return this.preId === 0 ? losses[1] : hot[1];
         case '三星一码个位':
           return this.preId === 0 ? losses[2] : hot[2];
-        ////三星二码百十位  三星二码百个位 三星二码十个位
         case '三星二码百十位':
           return this.preId === 0 ? [losses[0], losses[1]] : [hot[0], hot[1]];
         case '三星二码百个位':
@@ -781,44 +786,48 @@ export default {
         case '三星组选组三胆拖':
         case '三星跨度':
           return this.preId === 0 ? [zxzh1] : [zxzh1_hot];
-
         case '中三组三复式':
         case '中三组三胆拖':
         case '中三组六复式':
         case '中三组六胆拖':
         case '中三直选组合':
           return this.preId === 0 ? [zxzh2] : [zxzh2_hot];
-
         case '后三组三复式':
         case '后三组三胆拖':
         case '后三组六复式':
         case '后三组六胆拖':
         case '后三直选组合':
           return this.preId === 0 ? [zxzh3] : [zxzh3_hot];
-        //-------------------
-        // 四星直选复式
         case '四星直选复式':
           return this.preId === 0
             ? losses.filter((_, k) => k > 0)
             : hot.filter((_, k) => k > 0);
-
-        // 前三直选复式
         case '前三直选复式':
           return this.preId === 0
             ? losses.filter((_, k) => k < 3)
             : hot.filter((_, k) => k < 3);
-
-        // 中三直选复式
         case '中三直选复式':
           return this.preId === 0
             ? losses.filter((_, k) => k > 0 && k < 4)
             : hot.filter((_, k) => k > 0 && k < 4);
-
-        // 后三直选复式
         case '后三直选复式':
           return this.preId === 0
             ? losses.filter((_, k) => k > 1 && k < 5)
             : hot.filter((_, k) => k > 1 && k < 5);
+
+        // 已有的前后二直选和组选
+        case '前二直选':
+          return this.preId === 0 ? losses.slice(0, 2) : hot.slice(0, 2); // 前两位：万位、千位
+        case '后二直选':
+          return this.preId === 0 ? losses.slice(-2) : hot.slice(-2); // 后两位：十位、个位
+        case '前二组选':
+          return this.preId === 0 ? [zxzh1] : [zxzh1_hot]; // 前二组选使用前三组选数据
+        case '后二组选':
+          return this.preId === 0 ? [zxzh3] : [zxzh3_hot]; // 后二组选使用后三组选数据
+
+        // 新增的后一直选
+        case '后一直选':
+          return this.preId === 0 ? losses.slice(-1) : hot.slice(-1); // 后一位：个位
 
         // 默认情况
         default:
@@ -950,6 +959,7 @@ export default {
       );
     },
     currentComponent() {
+      console.log(this.value);
       switch (this.value) {
         // 复式类型
         case '三星直选复式':
@@ -1061,6 +1071,18 @@ export default {
         case '三星波色龙虎和':
         case '三星豹子顺子对子':
           return 'ball26';
+        case '后二直选':
+        case '前二直选':
+          return 'ball29';
+        case '后二和值':
+        case '前二和值':
+          return 'ball28';
+        case '后一直选':
+        case '后二组选':
+        case '前二组选':
+          return 'ball30';
+        case '大小单双':
+          return 'ball31';
         // 默认情况
         default:
           return 'ball1';
@@ -1350,6 +1372,7 @@ export default {
       }
     },
     async ajaxPay(v) {
+      console.log(v);
       const [err] = await userApi.lotteryBet({
         lotteryId: this.id,
         betCode: v,
@@ -1535,7 +1558,7 @@ export default {
       if (!res.data.nextExpect) {
         res.data.nextExpect = {};
       }
-      this.detail = res.data;
+      console.log(res.data);
       const curDoc = this.setHistory();
       if (!curDoc) {
         this.curNav = this.catTree[0]?.name;

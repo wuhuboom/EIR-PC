@@ -346,4 +346,60 @@ export default {
     }
     return selection.length;
   },
+  chose17(geWei) {
+    // 确保每个位的数字是数组
+    if (!Array.isArray(geWei)) {
+      return {
+        err: err1,
+      };
+    }
+    // 确保每个位至少有一个号码
+    if (geWei.length === 0) {
+      return {
+        err: err1,
+      };
+    }
+    // 计算总注数
+    const totalBets = geWei.length;
+
+    // 统一条件判断
+    if (totalBets > 8) {
+      return {
+        err: '您好，为了防止恶意套取充值赠送，每个位置最多购买8个号码',
+      };
+    }
+
+    return totalBets * 1;
+  },
+  //三星直选：直选复式
+  chose18(shiWei, geWei) {
+    // 确保每个位的数字是数组
+    if (!Array.isArray(shiWei) || !Array.isArray(geWei)) {
+      return {
+        err: err1,
+      };
+    }
+    // 确保每个位至少有一个号码
+    if (shiWei.length === 0 || geWei.length === 0) {
+      return {
+        err: err1,
+      };
+    }
+    // 计算总注数
+    const totalBets = shiWei.length * geWei.length;
+    const lengths = [shiWei.length, geWei.length];
+    const count8 = lengths.filter((len) => len === 8).length;
+
+    // 统一条件判断
+    if (lengths.some((len) => len > 8) || count8 >= 3) {
+      return {
+        err: lengths.some((len) => len > 8)
+          ? '您好，为了防止恶意套取充值赠送，每个位置最多购买8个号码'
+          : '三个位置不能同时选择8个号码，至少有一个位置少于8个号码',
+        totalBets: totalBets,
+      };
+    }
+
+    return totalBets;
+  },
 };

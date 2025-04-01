@@ -158,7 +158,6 @@
                       {{ item.name }}
                     </td>
                     <td
-                      v-if="item.positions"
                       align="center"
                       style="
                         min-height: 30px;
@@ -171,17 +170,54 @@
                         justify-content: center;
                       "
                     >
+                      <!-- 当 name 为特定值时，将 positions[0] 的数字用 | 分隔 -->
                       <div
+                        v-if="
+                          [
+                            '前三直选和值',
+                            '前三直选组合',
+                            '前三组三复式',
+                            '前三组六复式',
+                            '中三直选和值',
+                            '中三直选组合',
+                            '中三组三复式',
+                            '后三直选和值',
+                            '后三直选组合',
+                            '后三组三复式',
+                            '后二和值',
+                            '后二组选',
+                            '后一直选',
+                            '前二和值',
+                            '前二组选',
+                          ].includes(item.name)
+                        "
                         class="align-center x-container"
-                        v-for="(doc, idx) in item.positions"
+                      >
+                        <div
+                          v-for="(v, i) in item.positions[0]"
+                          :key="i"
+                          class="align-center"
+                        >
+                          <div style="color: #fff">{{ v }}</div>
+                          <div
+                            v-if="i < item.positions[0].length - 1"
+                            style="font-size: 18px; color: rgb(255, 216, 0)"
+                          >
+                            |
+                          </div>
+                        </div>
+                      </div>
+                      <!-- 其他情况下，保持原有逻辑 -->
+                      <div
+                        v-else
+                        class="align-center x-container"
+                        v-for="(doc, idx) in item?.positions"
                         :key="idx"
                       >
                         <div v-for="(v, i) in doc" :key="i">
-                          <div class="" style="color: #fff">
-                            {{ v }}
-                          </div>
+                          <div style="color: #fff">{{ v }}</div>
                         </div>
-                        <div v-if="idx < item.positions.length - 1">
+                        <div v-if="idx < item.positions?.length - 1">
                           <div
                             class="o-select-ball"
                             style="font-size: 18px; color: rgb(255, 216, 0)"

@@ -168,7 +168,6 @@ export default {
   methods: {
     bindPay(v) {
       alert(v);
-      console.log(v, '--');
       //v 0支付宝 1微信 2银行卡 3USDT
       switch (v) {
         case 0:
